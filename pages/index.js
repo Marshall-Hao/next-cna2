@@ -1,7 +1,21 @@
 import Link from "next/link";
 import CustomLink from "../component/CustomLink";
 
-const Home = () => {
+const Home = ({ count, setCount }) => {
+  const get = () => {
+    fetch("http://localhost:3000/api/method")
+      .then((res) => res.json())
+      .then((json) => console.log("get", json));
+  };
+
+  const post = () => {
+    fetch("http://localhost:3000/api/method", {
+      method: "POST",
+    })
+      .then((res) => res.json())
+      .then((json) => console.log("get", json));
+  };
+
   return (
     <main>
       <h1>Home</h1>
@@ -47,6 +61,14 @@ const Home = () => {
           </Link>
         </li>
       </ul>
+      <div>
+        <button onClick={get}>get</button>
+        <button onClick={post}>post</button>
+        <h1>{count}</h1>
+        <button onClick={() => setCount((c) => c + 1)}>
+          +
+        </button>
+      </div>
     </main>
   );
 };
